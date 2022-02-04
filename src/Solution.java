@@ -130,8 +130,8 @@ public class Solution  implements Runnable {
 		recursiveCheck(myString);
 		//System.out.println(myString);
 		
-		String userName = new String(Base64.getEncoder().encode("svc_prdrmqadprd01".getBytes())) ;
-		String password = new String(Base64.getEncoder().encode("K:LpjCXUv*;24m93DHwbG8~=".getBytes()));
+		String userName = new String();
+		String password = new String();
 		
 		System.out.println(userName + " :: "+password);
 		System.out.println(new String(Base64.getDecoder().decode(userName))+" :: "+
