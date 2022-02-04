@@ -1,0 +1,4 @@
+fileignoreconfig:
+- filename: src/Solution.java
+  checksum: 82f2a6b3dd8d790ae5145fca08a84c741c1edba5b378d46bb176171f7617614c
+version: "1.0"
