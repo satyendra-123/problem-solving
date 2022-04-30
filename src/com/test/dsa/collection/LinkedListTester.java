@@ -9,7 +9,31 @@ public class LinkedListTester {
         Node root = createLinkedList();
        // testPrintKthElementFromEnd(root, 4);
         //duplicateRemoveFromLinkedList();
-        findMiddleElement(root, root);
+        //findMiddleElement(root, root);
+
+        System.out.println("before delete");
+        Node temp = root;
+        while(temp != null){
+            System.out.print(temp.getData()+" ");
+            temp = temp.next;
+        }
+        System.out.print("\n");
+        deleteGivenNode(root.next);
+        System.out.println("after delete");
+        while(root != null){
+            System.out.print(root.getData()+" ");
+            root = root.next;
+        }
+    }
+
+    private static void deleteGivenNode(Node node){
+        Node temp = node.next;
+        node.next = null;
+        node = temp;
+        while(node != null){
+            System.out.print(node.getData()+" ");
+            node = node.next;
+        }
     }
 
     private void testReverse(){

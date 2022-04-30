@@ -19,7 +19,15 @@ public class TreeTester {
 
     }
 
+    /**
+     * create binary tree from a given array
+     * @param arr
+     * @return
+     */
+    private static Node createBinaryTree(int[] arr){
 
+        return null;
+    }
 
     //binary tree
     private static Node createBinaryTree(){

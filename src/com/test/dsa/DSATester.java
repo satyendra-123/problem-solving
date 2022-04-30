@@ -41,7 +41,318 @@ public class DSATester {
 //        System.out.println(dsaTester.kthSmallestNumber(new ArrayList<>(Arrays.asList(8, 16, 80, 55,
 //                32, 8, 38, 40, 65, 18, 15, 45, 50, 38, 54, 52, 23, 74, 81, 42, 28, 16, 66, 35,
 //                91, 36, 44, 9, 85, 58, 59, 49, 75, 20, 87, 60, 17, 11, 39, 62, 20, 17, 46, 26, 81, 92)), 9));
+
+       // dsaTester.solve(createList());
+       // System.out.println(dsaTester.longestConsecutiveOnes("-010100110101-"));
+//        dsaTester.minStepsToTransform(new ArrayList<>(Arrays.asList(85, 21, 10, 12, 48, 66, 12, 70, 31, 100, 10, 97,
+//                87, 30, 82, 58, 25, 59, 57, 77, 39, 98, 3, 61, 39, 46, 4, 74, 39, 14, 25, 74, 99, 76, 36,
+//                78, 51, 18, 98, 82, 11, 5, 47, 36, 42, 1, 76, 24, 25, 34, 62, 72, 80)), 3);
+
+//        System.out.println(dsaTester.lszero(new ArrayList<>(Arrays.asList(15, -25, 10, -8, -15, 14, -11, 12, 25, 26, -15, -23, -7, -7, 20,
+//                21, -7, -15))).toString() );
+
+         //System.out.println(new int[][]{ {1,0,1,0},  {1,0,0,1}, {0,1,0,1}, {1,0,1,0} });
+        System.out.println(foo(3,5));
+
     }
+
+    /**
+     * given a 2D array
+     * count the number of islands in the array
+     * 1 0 1 0
+     * 1 0 0 1
+     * 0 1 0 1
+     * 1 0 1 0
+     * count = 4
+     * @param arr
+     * @return
+     */
+    private int countIslands(int[][] arr){
+        int count=0;
+        for (int i = 0; i <arr.length ; i++) {
+            for (int j = 0; j <arr[i].length ; j++) {
+                    if(arr[i][j] == 1){
+                        //check if it is island
+                        //if(checkIsland(arr, i, j))
+                           //     count ++;
+                    }
+            }
+        }
+        return count;
+    }
+
+//    private boolean checkIsland(int[][] arr, int row, int col) {
+//        if(row >= 0 && row <= arr.length - 1 && col >= 0 && col <= arr.length - 1  && arr[row][col] == 0 ){
+//            return true;
+//        }
+//        else if(row <= -1 || row >= arr.length ){
+//            return true;
+//        }else if(col <=-1 || col >= arr.length){
+//            return true;
+//        }
+//        checkIsland(arr, row, col++);
+//        checkIsland(arr, row, col--);
+//        checkIsland(arr, row++, col);
+//        checkIsland(arr, row--, col);
+//        return false;
+//    }
+
+    static int bar(int x, int y){
+            if (y == 0)   return 0;
+            return (x + bar(x, y-1));
+    }
+
+    static int foo(int x, int y){
+            if (y == 0) return 1;
+            return bar(x, foo(x, y-1));
+    }
+
+    public ArrayList<Integer> lszero(ArrayList<Integer> A) {
+        //find all subarrays with sum zero; one with max length smallest index
+        int maxLen = Integer.MIN_VALUE;
+        int minIndex = A.size();
+        int lastIndex = 0;
+        int sum = 0;
+        int len = 0;
+        for(int i=0; i<A.size(); i++){
+            for(int j=i; j<A.size(); j++){
+                //i to j a subarray sum
+                if(arraySum(i, j, A) == 0){
+                    len = j-i+1;
+                    if(maxLen < len ){
+                        minIndex = i;
+                        lastIndex = j;
+                        maxLen = len;
+                    }else if(maxLen == len && minIndex >= i){
+                        minIndex = i;
+                        lastIndex = j;
+                    }
+                    //System.out.println(" maxLen "+maxLen+" minIndex "+minIndex+" lastIndex "+lastIndex);
+                }
+            }
+        }
+
+
+        ArrayList<Integer> result = new ArrayList<>();
+        while( minIndex <= lastIndex){
+            result.add(A.get(minIndex));
+            minIndex++;
+        }
+        return result;
+    }
+
+    private int arraySum(int s, int e, ArrayList<Integer> A){
+        int sum = 0;
+        System.out.print(" s "+s);
+        while(s<=e){
+            sum += A.get(s);
+            s++;
+        }
+        System.out.println(" e "+e+" sum "+sum);
+        return sum;
+    }
+
+
+
+
+    /**
+     * Given an array of integers, A, of length N, find the minimum number of steps you need to take to transform A
+     * such that the sum of any two adjacent elements is less than B.
+     * In one step you can reduce any number by 1.
+     * @param A
+     * @param B
+     * @return
+     */
+    private int minStepsToTransform(ArrayList<Integer> A, int B) {
+        int count = 0;
+        int val = 0;
+        if(A.get(0) > B){
+            val  = A.get(0)-B;
+            count += val;
+            A.set(0, A.get(0)-val);
+            val = 0;
+        }
+        for(int i=0; i<A.size()-1; i++){
+            if((A.get(i) + A.get(i+1)) > B){
+                val = A.get(i+1) - (B - A.get(i));
+                A.set(i+1, A.get(i+1)-val);
+                count += (val);
+                System.out.print(A.get(i)+" "+A.get(i+1)+" -> "+count);
+            }
+        }
+        return count;
+    }
+
+    private int longestConsecutiveOnes(String A){
+        int maxLength = 0;
+        boolean isSwap = false;
+        String temp = "0";
+        int l = 1;
+        int lcount = 0;
+        int r = 1;
+        boolean isZeroFoundInLeft = false;
+        boolean isZeroFoundInRight = false;
+        int rcount = 0;
+
+        String[] charr = A.trim().split("");
+        int N = charr.length - 2;
+        int i =1;
+        System.out.print(charr[0]+" "+charr[1]+"- >");
+        while(i < N){
+
+            if(charr[i].equals("0")){
+
+                //check left side
+                //for i > 0
+                l = i-1;
+                while(l >= 1){
+                    if(l >=1 && charr[l].equals("1") && !isZeroFoundInLeft){
+                        lcount++;
+                    }else if( l > 1  && charr[l].equals("0") && !isZeroFoundInLeft){
+                        //skip till we get next 1
+                        isZeroFoundInLeft = true;
+                    }else if(isZeroFoundInLeft && charr[l].equals("1")){
+                        isSwap = true;
+                        temp = charr[i];
+                        charr[i] = charr[l];
+                        charr[l] = temp;
+                        break;
+                    }
+                    l--;
+                }
+                //check right side
+                isZeroFoundInLeft = false;
+                r = i+1;
+                while(r <= N){
+                    if(r <= N-1 && charr[r].equals("1") && !isZeroFoundInRight){
+                        rcount++;
+                    }else if( r < N && charr[r].equals("0") && !isZeroFoundInRight){
+                        //skip till we get next 1
+                        isZeroFoundInRight = true;
+                    }else if (charr[r].equals("1") && isZeroFoundInRight && !isSwap){
+                        isSwap = true;
+                        temp = charr[i];
+                        charr[i] = charr[r];
+                        charr[r] = temp;
+                        break;
+                    }
+
+                    r++;
+                }
+                isZeroFoundInRight= false;
+
+
+                if(isSwap){
+                    maxLength = maxLength < (lcount+rcount)+1 ? (lcount+rcount)+1 : maxLength;
+                }
+
+                System.out.println("index "+i+"  "+lcount+" "+rcount+" "+isSwap+" "+maxLength);
+
+                isSwap = false;
+                lcount = 0;
+                rcount = 0;
+
+            }
+            i++;
+        }
+        return maxLength;
+
+    }
+
+    private static ArrayList<ArrayList<Integer>> createList(){
+        int [][] arr = new int[][]{
+                {15, 15, 1, 68, 50, 14, 29, 72, 71, 21},
+                {47, 45, 59, 56, 92, 82, 67, 24, 0, 98},
+                {72, 55, 66, 50, 38, 44, 19, 89, 38, 54},
+                {56, 54, 70, 10, 0, 72, 24, 3, 44, 48},
+                {24, 91, 45, 84, 99, 37, 18, 67, 13, 90},
+                {65, 85, 45, 83, 88, 83, 80, 7, 25, 18},
+                {62, 33, 24, 32, 43, 46, 56, 20, 1, 0},
+                {68, 78, 92, 65, 62, 91, 2, 32, 10, 15},
+                {22, 75, 53, 67, 11, 41, 2, 91, 48, 79},
+                {61, 62, 13, 86, 46, 56, 84, 2, 76, 86}
+        } ;
+        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+        for(int i=0; i<arr.length; i++){
+            ArrayList<Integer> list = new ArrayList<>();
+            for(int j=0; j<arr.length; j++){
+                list.add(arr[i][j]);
+            }
+            result.add(list);
+        }
+        return result;
+    }
+
+    private ArrayList<ArrayList<Integer>> solve(ArrayList<ArrayList<Integer>> A) {
+        int prevCol = -1;
+        ArrayList<Integer> prevList = new ArrayList<>();
+        for(int i=0; i<A.size(); i++){
+            for(int j=0; j<A.get(0).size(); j++){
+                //if a value is found zero
+                //first remove make all element of row to zero  .
+                //make all columns zero
+                //skip the row here break
+
+                if(A.get(i).get(j) == 0){
+                    if(!prevList.contains(j)){
+                        makeElementsZeroInRow(A, i, j);
+                        //prevCol = j;
+                        prevList.add(j);
+                        makeElementsZeroInColumn(A, i, j);
+                        break;
+                    }
+                }
+
+            }
+        }
+
+        for(int k=0; k<A.size(); k++){
+            for(int l=0; l<A.size(); l++){
+                System.out.print(A.get(k).get(l)+" - ");
+            }
+            System.out.println();
+        }
+        return A;
+    }
+
+    private void makeElementsZeroInRow(ArrayList<ArrayList<Integer>> A, int i, int j){
+        j = 0;
+        while( j <= A.get(0).size()-1){
+            A.get(i).set(j, 0);
+            j++;
+        }
+
+    }
+
+    private void makeElementsZeroInColumn(ArrayList<ArrayList<Integer>> A, int i, int j){
+        System.out.println(" column transform "+" row "+i+" col "+j);
+
+        i = 0;
+        while( i <= A.get(0).size()-1){
+
+            A.get(i).set(j, 0);
+            i++;
+        }
+    }
+
+    /**
+     * Without extra space and in O(n)
+     *
+     */
+    private static void findEquilibriumIndex(){
+
+    }
+
+    /**
+     * 2 1 2 4 3 8 5 7 8
+     * ans = 7
+     */
+    private void countNumberGreaterThanNumberItself(int[] arr){
+        for(int i=0; i<arr.length; i++){
+
+        }
+    }
+
 
     //TODO: incomplete solution
     private int kthSmallestNumber(final List<Integer> A, int B) {
