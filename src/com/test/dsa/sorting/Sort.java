@@ -23,9 +23,10 @@ public class Sort {
         int[] merged = merge_sorted_arrays(new int[]{2, 9, 12, 24}, new int[]{1, 4, 5, 7, 10, 13, 16, 21});
         System.out.println("sorted merged array "+ Arrays.toString(merged));
 
+        int[] arr2 = new int[]{9,1,3,2,8,4,5,20,15,7,-1,5,3,10,2,15,11};
         System.out.println("Merge Sort Starting ");
-        merge_sort(arr, 0, arr.length-1);
-        System.out.println(" Merge Sort Done "+Arrays.toString(arr));
+        merge_sort(arr2, 0, arr2.length-1);
+        System.out.println(" Merge Sort Done "+Arrays.toString(arr2));
 
     }
 
@@ -122,20 +123,25 @@ public class Sort {
 
     private static void merge(int[] A, int l, int mid, int r){
           //both arrays are sorted we need to merge them
+          int s = l;
           int k = mid+1;
-          int temp = 0;
+          int[] c = new int[r-l+1];
+          int m = 0;
+          //two sorted arrays merge into one.
           while( l<= mid && k <= r){
-              if(A[l] < A[k]){
-
-                  l++;
-              }
-              else{
-                  temp = A[k];
-                  A[k] = A[l];
-                  A[l] = temp;
-                  k++;
-              }
+              if(A[l] < A[k])
+                  c[m++] = A[l++];
+              else
+                  c[m++] = A[k++];
           }
+          while(l<=mid)
+                c[m++] = A[l++];
+          while(k<=r)
+            c[m++] = A[k++];
+        //copy the array back into A from c
+        for(int i=0; i<c.length; i++)
+            A[s++] = c[i];
+
     }
 
 }

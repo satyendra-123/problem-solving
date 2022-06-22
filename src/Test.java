@@ -34,5 +34,31 @@ public class Test extends Thread
                 } 
             } 
         }.start(); 
-    } 
+    }
+
+}
+
+interface A{
+    default void a(){
+    }
+
+    static void ab(){
+
+    }
+}
+
+interface B{
+    default void b(){
+    }
+
+    static void ab(){
+
+    }
+}
+
+class C implements B,A{
+    @Override
+    public void a() {
+        A.super.a();
+    }
 }
