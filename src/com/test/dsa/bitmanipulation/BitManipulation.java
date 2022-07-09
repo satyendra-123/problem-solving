@@ -1,4 +1,4 @@
-package com.test.dsa;
+package com.test.dsa.bitmanipulation;
 
 public class BitManipulation {
 
@@ -59,4 +59,6 @@ public class BitManipulation {
         else
             return isPos ? sum : -sum;
     }
+
+
 }

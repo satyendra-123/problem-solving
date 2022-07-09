@@ -53,4 +53,34 @@ public class Two_Pointers_Problem {
         return max;
     }
 
+
+    //find the 3 sum such that all sums up to zero
+
+    //find 2 sum
+
+    /**
+     * msft
+     * given three sorted arrays find i,j,k such that
+     * max(A[i], B[j], C[k]) - min(A[i], B[j], C[k]) should be min
+     */
+
+
+    //find number of tripplets such that
+    /**
+     * i < j < k; A[i] < A[j] < A[k]
+     *
+     * Brute Force
+     * for each ith index need to check if that makes a tripplet
+     * TC:
+     * worst case : [1 2 3 4 5 6 7 8 9] O(n*n)
+     * sc: O(1)
+     *
+     * Alternative Approach 1
+     * for each ith index check left smaller and right greater elements to it.
+     * multiply left *  right and keep adding to sum
+     */
+
+
+
+
 }

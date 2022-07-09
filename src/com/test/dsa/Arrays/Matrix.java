@@ -6,8 +6,10 @@ import java.util.Arrays;
 public class Matrix {
     public static void main(String[] args) {
       //  System.out.println(Arrays.toString(new int[]{1, 2, 3}));
-        System.out.println(countSlots());
+        //System.out.println(countSlots());
         //System.out.println("000".matches("[1-9]+"));
+        Matrix mat = new Matrix();
+        mat.transposeAndRotate();
     }
 
     //find submetrices sum
@@ -46,5 +48,91 @@ public class Matrix {
         return sum;
     }
 
-    //hard problem
+
+    //Transpose matrix
+
+    //rotate matrix clock wise 90 degree from top right direction as ref
+    /**
+     * 1  2  3  4
+     * 5  6  7  8
+     * 9 10  11 12
+     * 13 14 15 16
+     *
+     * result
+     * 13  9   5  1
+     * 14  10  6  2
+     * 15  11  7  3
+     * 16  12  8  4
+     *
+     */
+    private void transposeAndRotate(){
+        int r = 4;
+        int c = 4;
+        int[][] mat = createMatrix(r, c);
+        //original
+        System.out.println("original matrix");
+        printMatrix(mat);
+        int i = 1;
+        int j = 0;
+        int temp = 0;
+        for(; i<mat.length; i++){
+            for(j=0; j<i; j++){
+                temp = mat[i][j];
+                mat[i][j] = mat[j][i];
+                mat[j][i] = temp;
+            }
+        }
+        //transposed
+        System.out.println("transposed matrix");
+        printMatrix(mat);
+
+        //reverse
+        int k =0;
+        for(i=0; i<mat.length; i++){
+            j = 0;
+            k = mat[i].length-1;
+           while( j < k ){
+               temp = mat[i][j];
+               mat[i][j] = mat[i][k];
+               mat[i][k] = temp;
+               k--;
+               j++;
+           }
+        }
+        //result
+        System.out.println("rotated matrix");
+        printMatrix(mat);
+    }
+
+    //print diagonal matrix
+    /**
+     *
+     */
+    private void printDiagonalMatrix(){
+
+    }
+
+    private int[][] createMatrix(int r, int c){
+        int[][] mat = new int[r][c];
+        int i = 0;
+        int j = 0;
+        int count = 1;
+        for(;i<mat.length; i++){
+            for(j=0; j<mat[i].length; j++)
+                mat[i][j] = count++;
+        }
+        return mat;
+    }
+
+    private void printMatrix(int[][] mat){
+        int i =0;
+        int j = 0;
+        for(i=0; i<mat.length; i++){
+            for(j=0; j<mat[i].length; j++){
+                System.out.print(mat[i][j]+" ");
+            }
+            System.out.println();
+        }
+
+    }
 }
