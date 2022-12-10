@@ -1,4 +1,6 @@
 fileignoreconfig:
 - filename: src/Solution.java
   checksum: b8a009ee5012a8d5811a3f4d71798742e026d069dc83245305c09991b75ec76c
+- filename: src/com/test/dsa/linkedist/LRU_Cache.java
+  checksum: 6035f1deac3dc5d6ca2bdd05285149c01355d8df83830a1066ddf53cfd795ce8
 version: "1.0"
