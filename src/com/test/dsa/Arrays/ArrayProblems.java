@@ -29,6 +29,35 @@ public class ArrayProblems {
         return res;
     }
 
+    //next greater element
+    /**
+     * given an unsorted array find next greater element towards its right
+     * [2,1,4,3,7]
+     * [4,4,7,7,-1]
+     *
+     * Brute Force
+     * for each element need to check its right immediate greater element and add to response.
+     * TC: O(N*N)
+     * SC: O(1)
+     *
+     *
+     * approach 2
+     *  using stack
+     *  1) push element to stack
+     *  2) if top element in stack is smaller than current element
+     * */
+    private void approach1(int[] arr){
+        int[][] res = new int[arr.length][2];
+        int i = 0;
+
+        while(i < arr.length){
+
+            i++;
+        }
+    }
+
+
+
     private static ArrayList<Integer> flatten(ArrayList<Object> list, ArrayList<Integer> res){
         for(int i =0; i<list.size(); i++){
             if(list.get(i) instanceof Integer) {

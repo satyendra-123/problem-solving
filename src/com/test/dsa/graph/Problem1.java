@@ -24,5 +24,4 @@ package com.test.dsa.graph;
  * So the answer is "makkek".
  */
 public class Problem1 {
-
 }
